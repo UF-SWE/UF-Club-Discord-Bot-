@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import {signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "./firebase-config.js"
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -7,6 +9,13 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login with:', email, password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
