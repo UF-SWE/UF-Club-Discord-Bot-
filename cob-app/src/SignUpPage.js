@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import  { Link } from "react-router-dom"
 import {signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "./firebase-config.js"
-function LoginPage() {
+function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,7 +20,7 @@ function LoginPage() {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>SignUp</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -47,4 +47,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SignUpPage;
