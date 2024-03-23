@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import  { Link } from "react-router-dom"
 import {signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from "./firebase-config.js"
+import { auth } from "../firebase-config.js"
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
