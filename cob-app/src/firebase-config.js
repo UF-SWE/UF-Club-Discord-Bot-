@@ -6,6 +6,8 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDP0Cx3l6atn-7Dzo3Y6PgO7jVG0Uv76z8",
   authDomain: "cob-app-d5529.firebaseapp.com",
