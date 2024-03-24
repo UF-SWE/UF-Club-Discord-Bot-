@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import  { Link } from "react-router-dom"
-import {signInWithEmailAndPassword } from 'firebase/auth';
+import {createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase-config.js"
 function SignUpPage() {
   const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ function SignUpPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login with:', email, password);
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential)
       })
@@ -20,7 +20,7 @@ function SignUpPage() {
 
   return (
     <div>
-      <h2>SignUp</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -40,7 +40,7 @@ function SignUpPage() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit"> SignUp </button>
        
       </form>
     </div>

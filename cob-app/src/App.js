@@ -5,6 +5,7 @@ import SignUpPage from './Components/SignUpPage';
 import HomePage from './Components/HomePage';
 import AboutPage from './Components/AboutPage';
 import ClubListPage from './Components/ClubListPage';
+import Navbar from './Components/NavBar';
 import './App.css';
 import logo from './logo.svg';
 
@@ -14,7 +15,9 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <Navbar />
         <Routes>
+          
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />

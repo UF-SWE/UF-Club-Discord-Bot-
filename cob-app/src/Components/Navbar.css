@@ -1,0 +1,40 @@
+.navbar {
+    background-color: rgb(37, 41, 37);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 1.5rem;
+  }
+  
+  .navbar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar a {
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar li a {
+    font-size: 1.2rem;
+  }
+  
+  .navbar li.active {
+    border-bottom: 3px ridge white;
+    color: orangered;
+  }
+  
+  .navbar li:hover {
+    /* border-bottom: 2px solid white; */
+    color: orangered;
+  }
