@@ -4,7 +4,8 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="site-title">
-        Community Outreach Bot
+      <img src="./Images/COBmascot.png" alt="COB Logo" className="logo-image" width = "50" height = "50"/> 
+      C.O.B.
       </Link>
 
       <ul>
