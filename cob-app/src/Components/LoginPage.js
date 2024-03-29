@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import  { Link } from "react-router-dom"
 import {signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase-config.js"
-function LoginPage() {
+import './LoginPage.css'
+function LoginPage({setUser}) {
   const [email, setEmail] = useState('');
+ 
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,16 +15,19 @@ function LoginPage() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential)
+        setUser(email.slice(0, email.length-8).toLocaleUpperCase())
+        setError('');
       })
       .catch((error) => {
         console.log(error);
+        setError('Incorrect Username or Password.')
       });
   };
 
   return (
-    <div>
+    <div className='login-container'>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form className='logon-form' onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
           <input
@@ -41,8 +47,8 @@ function LoginPage() {
           />
         </div>
         <button type="submit">Login</button>
-       
       </form>
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import './Navbar.css';
-export default function Navbar() {
+import LoginPage from './LoginPage';
+export default function Navbar({user}) {
   return (
     <nav className="navbar">
       <Link to="/" className="site-title">
@@ -9,10 +10,14 @@ export default function Navbar() {
       </Link>
 
       <ul>
+        {user !== null && (
+           <li>Welcome, {user}</li>
+        )}
         <CustomLink to="/login">Login</CustomLink>
         <CustomLink to="/signup">Sign Up</CustomLink>
         <CustomLink to="/clublist">Clubs </CustomLink>
         <CustomLink to="/about">About </CustomLink>
+       
       </ul>
     </nav>
   )

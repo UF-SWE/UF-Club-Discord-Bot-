@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import  { Link } from "react-router-dom"
 import {createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase-config.js"
+import './LoginPage.css'
 function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,9 +21,9 @@ function SignUpPage() {
   };
 
   return (
-    <div>
+    <div className='login-container'>
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+      <form className='login-form' onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
           <input

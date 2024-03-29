@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './Components/LoginPage';
 import SignUpPage from './Components/SignUpPage';
@@ -12,19 +12,22 @@ import logo from './logo.svg';
 function App() {
   const defaultCenter = { lat: 32, lng: -82 }; 
   const defaultZoom = 10;
+  const [user, setUser] = useState(null); // State for storing user information
+
   return (
     <Router>
       <div className="App">
-        <Navbar />
+      <Navbar user={user} setUser={setUser} />
         <Routes>
           
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/clublist" element={<ClubListPage />} />
         </Routes>
-      </div>
+      
+    </div>
     </Router>
   );
 }

@@ -31,10 +31,10 @@
   
   .navbar li.active {
     border-bottom: 3px ridge white;
-    color: orangered;
+    color: rgb(0, 157, 255);
   }
   
   .navbar li:hover {
     /* border-bottom: 2px solid white; */
-    color: orangered;
+    color: rgb(0, 157, 255);
   }
