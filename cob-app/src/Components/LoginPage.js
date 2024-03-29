@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
+import ClubFormPage from './ClubFormPage.js';
 import  { Link } from "react-router-dom"
 import {signInWithEmailAndPassword } from 'firebase/auth';
+
+
 import { auth } from "../firebase-config.js"
 import './LoginPage.css'
 function LoginPage({setUser}) {
   const [email, setEmail] = useState('');
- 
+  
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const nav = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,9 +23,12 @@ function LoginPage({setUser}) {
         console.log(userCredential)
         setUser(email.slice(0, email.length-8).toLocaleUpperCase())
         setError('');
+        setIsLoggedIn(true);
+        nav('/club-form');
       })
       .catch((error) => {
         console.log(error);
+  
         setError('Incorrect Username or Password.')
       });
   };
@@ -49,6 +58,7 @@ function LoginPage({setUser}) {
         <button type="submit">Login</button>
       </form>
       {error && <p className="error-message">{error}</p>}
+      
     </div>
   );
 }

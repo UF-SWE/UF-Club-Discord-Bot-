@@ -5,14 +5,16 @@ import SignUpPage from './Components/SignUpPage';
 import HomePage from './Components/HomePage';
 import AboutPage from './Components/AboutPage';
 import ClubListPage from './Components/ClubListPage';
-import Navbar from './Components/NavBar';
+import Navbar from './Components/NavBar'
 import './App.css';
 import logo from './logo.svg';
+import ClubFormPage from './Components/ClubFormPage';
 
 function App() {
   const defaultCenter = { lat: 32, lng: -82 }; 
   const defaultZoom = 10;
   const [user, setUser] = useState(null); // State for storing user information
+  
 
   return (
     <Router>
@@ -25,6 +27,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/clublist" element={<ClubListPage />} />
+          <Route path="/club-form" element={<ClubFormPage />} />
         </Routes>
       
     </div>
