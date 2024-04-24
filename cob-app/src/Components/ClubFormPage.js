@@ -2,33 +2,46 @@
 
 import React, { useState } from 'react';
 import { db } from '../firebase-config';
-import { collection, addDoc } from 'firebase/firestore';
+import {doc, collection, addDoc, updateDoc, setDoc } from 'firebase/firestore';
 
 
 
-const clubsRef = collection(db, 'ClubData');
+const docRef = doc(db, "Schools/university of florida");
+
 function ClubFormPage() {
   const [clubData, setClubData] = useState({
     name: '',
-    announcement: ''
-  });
+    announcement: '',
+    members: '',
+    president: ''
   
+  });
+  const prevClub = clubData;
   const handleChange = (e) => {
-    setClubData({ ...clubData, [e.target.name]: e.target.value });
+    setClubData({ ...prevClub, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
     try {
       // Send data to Firebase Firestore
-      await addDoc(clubsRef, {
-        name: clubData.name,
-        announcement: clubData.announcement
-        // Add other fields as needed
-      });
+      
+      await setDoc(docRef, {
+        clubs: {
+          [clubData.name]: {
+            // Nested fields for the club
+            announcement: clubData.announcement,
+            members : clubData.members,
+            president : clubData.president
+           
+            // Add other fields as needed
+          }
+        }
+      
+      }, {merge:true});
       console.log('Club data sent successfully!');
       setClubData({
-        name: '',
-        announcement: ''
+        name: clubData.name,
+        announcement: clubData.announcement
       });
     } catch (error) {
       console.error('Error sending club data: ', error);
@@ -50,11 +63,29 @@ function ClubFormPage() {
           />
         </div>
         <div>
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="announcement">Announcement:</label>
           <textarea
-            id="description"
-            name="description"
-            value={clubData.description}
+            id="announcement"
+            name="announcement"
+            value={clubData.announcement}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div>
+          <label htmlFor="members">Members:</label>
+          <textarea
+            id="members"
+            name="members"
+            value={clubData.members}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div>
+          <label htmlFor="president">President:</label>
+          <textarea
+            id="president"
+            name="president"
+            value={clubData.president}
             onChange={handleChange}
           ></textarea>
         </div>
