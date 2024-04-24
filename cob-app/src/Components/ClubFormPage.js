@@ -26,17 +26,22 @@ function ClubFormPage() {
       // Send data to Firebase Firestore
       
       await setDoc(docRef, {
-        clubs: {
+        
           [clubData.name]: {
             // Nested fields for the club
-            announcement: clubData.announcement,
-            members : clubData.members,
-            president : clubData.president
+            ["info"]:{
+              emails: clubData.announcement,
+              phones : clubData.members,
+              websites: {},
+            },
+            members: clubData.members,
+            posts: {}
+            
            
             // Add other fields as needed
           }
-        }
-      }, {merge:true});
+        } , {merge:true});
+     
       console.log('Club data sent successfully!');
       setClubData({
         name: clubData.name,
