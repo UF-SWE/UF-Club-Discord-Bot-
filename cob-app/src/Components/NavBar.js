@@ -19,7 +19,7 @@ export default function Navbar({user}) {
         <CustomLink to="/signup">Sign Up</CustomLink>
         <CustomLink to="/clublist">Clubs </CustomLink>
         <CustomLink to="/about">About </CustomLink>
-        <CustomLink to="/profile">Profile </CustomLink>
+        
        
       </ul>
     </nav>
