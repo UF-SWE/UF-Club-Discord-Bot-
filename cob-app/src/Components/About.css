@@ -1,0 +1,10 @@
+.about-container {
+    text-align: center; 
+  }
+  
+ .text-box {
+    display: inline-block; 
+    text-align: left; 
+    max-width: 600px; 
+    margin: 0 auto; 
+}
