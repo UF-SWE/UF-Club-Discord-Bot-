@@ -7,6 +7,7 @@ import {signInWithEmailAndPassword } from 'firebase/auth';
 
 import { auth } from "../firebase-config.js"
 import './LoginPage.css'
+
 function LoginPage({setUser, user}) {
   const [email, setEmail] = useState('');
   
@@ -36,6 +37,9 @@ function LoginPage({setUser, user}) {
 
   return (
     <div className='login-container'>
+      <img src="./Images/largerSignUp.jpg" alt="Sign Up" className="signup-image">
+      </img>
+      
       <h2>Login</h2>
       <form className='logon-form' onSubmit={handleSubmit}>
         <div>

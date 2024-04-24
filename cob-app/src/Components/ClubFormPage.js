@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase-config';
 import {doc, collection, addDoc, updateDoc, setDoc } from 'firebase/firestore';
-
+import './ClubFormPage.css';
 
 
 const docRef = doc(db, "Schools/university of florida");
@@ -48,10 +48,14 @@ function ClubFormPage() {
   };
 
   return (
-    <div>
+  <div className = "signup-form">
+  
+    <img src="./Images/largerSignUp.jpg">
+    </img>
+    <div className='content'>
       <h2>Club Signup Form</h2>
       <form>
-        <div>
+        <div className='form-group'>
           <label htmlFor="name">Club Name:</label>
           <input
             type="text"
@@ -61,7 +65,7 @@ function ClubFormPage() {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor="announcement">Announcement:</label>
           <textarea
             id="announcement"
@@ -70,8 +74,8 @@ function ClubFormPage() {
             onChange={handleChange}
           ></textarea>
         </div>
-        <div>
-          <label htmlFor="members">Club Size:</label>
+        <div className='form-group'>
+          <label htmlFor="members">Members:</label>
           <textarea
             id="members"
             name="members"
@@ -79,7 +83,7 @@ function ClubFormPage() {
             onChange={handleChange}
           ></textarea>
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor="president">President:</label>
           <textarea
             id="president"
@@ -88,10 +92,13 @@ function ClubFormPage() {
             onChange={handleChange}
           ></textarea>
         </div>
-        {/* Add your other form fields here */}
+        
         <button type="button" onClick={handleSubmit}>Submit</button>
       </form>
     </div>
+   
+ </div>
+      
   );
 }
 
