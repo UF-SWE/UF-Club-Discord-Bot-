@@ -36,7 +36,6 @@ function ClubFormPage() {
             // Add other fields as needed
           }
         }
-      
       }, {merge:true});
       console.log('Club data sent successfully!');
       setClubData({
@@ -72,7 +71,7 @@ function ClubFormPage() {
           ></textarea>
         </div>
         <div>
-          <label htmlFor="members">Members:</label>
+          <label htmlFor="members">Club Size:</label>
           <textarea
             id="members"
             name="members"
