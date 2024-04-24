@@ -8,7 +8,7 @@ import './ClubFormPage.css';
 
 const docRef = doc(db, "Schools/university of florida");
 
-function ClubFormPage() {
+function ClubFormPage({user, setUser}) {
   const [clubData, setClubData] = useState({
     name: '',
     announcement: '',
@@ -16,6 +16,7 @@ function ClubFormPage() {
     president: ''
   
   });
+  const prevUser = user;
   const prevClub = clubData;
   const handleChange = (e) => {
     setClubData({ ...prevClub, [e.target.name]: e.target.value });
@@ -24,6 +25,10 @@ function ClubFormPage() {
   const handleSubmit = async () => {
     try {
       // Send data to Firebase Firestore
+      setUser(prevUser => ({
+        ...prevUser,
+        club: clubData.name
+      }));
       
       await setDoc(docRef, {
         
