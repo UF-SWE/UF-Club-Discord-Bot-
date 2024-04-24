@@ -1,17 +1,18 @@
 import discord #https://discordpy.readthedocs.io/en/stable/
 from discord.ext import commands
-from discord import ui
 
+from .firebase import Firebase
 from .env import (
   DISCORD_TOKEN,
 )
 
-intents = discord.Intents.default()
-intents.message_content = True
-#intents.messages = True
-
 class ClubBot(commands.Bot):
   def __init__(self):
+    print("Bot")
+    self.firebase = Firebase()
+
+    intents = discord.Intents.default()
+    intents.message_content = True
     super().__init__(
       command_prefix=commands.when_mentioned_or('/'),
       intents = intents,
@@ -19,14 +20,22 @@ class ClubBot(commands.Bot):
 
   async def on_ready(self):
     print("Logged on as", self.user)
+    await self.setup()
+    
+  async def setup(self):
+    extensions = (
+      "src.design",
+    )
+    for i, extension in enumerate(extensions):
+      await self.load_extension(extension)
 
-client = ClubBot()
-@client.tree.command(name="modal")
-async def modal(interaction: discord.Interaction):
-  await interaction.response.send_modal(PostsModal())
+def main():
+  client = ClubBot()
+  client.run('MTIyMzE4NjUxMDE3NDYyMTczNw.GmkuUk.XiZqBVONiSTFYU8gsp3W76RN6ZQ4rPwK2QFzGs')
 
+if __name__ == "__main__":
+  main()  
 
-client.run('MTIyMzE4NjUxMDE3NDYyMTczNw.GmkuUk.XiZqBVONiSTFYU8gsp3W76RN6ZQ4rPwK2QFzGs')
 '''
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
