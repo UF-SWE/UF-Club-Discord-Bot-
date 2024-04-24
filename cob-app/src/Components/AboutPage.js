@@ -1,11 +1,14 @@
 
 import React from 'react';
-
+import './About.css';
 function AboutPage() {
   return (
     <div className ="about-container">
-      <h2>About Us</h2>
-      <div className="text-box"> 
+      <img src="./Images/aboutGator.png">
+      </img>
+      <div className='overlay'></div>
+      <div className="content"> 
+        <h2>About Us</h2>
         <p>The goal for C.O.B. is to connect clubs here at the University of Florida to one single hub. 
           By serving as a central platform, C.O.B. facilitates seamless communication and collaboration among various student organizations, 
           fostering a vibrant and interconnected campus community. With C.O.B., clubs can easily share resources, coordinate events, and collaborate
@@ -15,6 +18,7 @@ function AboutPage() {
         </p>
       </div>
     </div>
+    
   );
 }
 
