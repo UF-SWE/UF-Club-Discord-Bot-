@@ -1,18 +1,33 @@
-
-import aiohttp
-import asyncio
 import discord #https://discordpy.readthedocs.io/en/stable/
-import logging
+from discord.ext import commands
+from discord import ui
 
 from .env import (
   DISCORD_TOKEN,
 )
 
-class ClubBot(discord.Client):
+intents = discord.Intents.default()
+intents.message_content = True
+#intents.messages = True
+
+class ClubBot(commands.Bot):
+  def __init__(self):
+    super().__init__(
+      command_prefix=commands.when_mentioned_or('/'),
+      intents = intents,
+    )
+
   async def on_ready(self):
     print("Logged on as", self.user)
 
+client = ClubBot()
+@client.tree.command(name="modal")
+async def modal(interaction: discord.Interaction):
+  await interaction.response.send_modal(PostsModal())
 
+
+client.run('MTIyMzE4NjUxMDE3NDYyMTczNw.GmkuUk.XiZqBVONiSTFYU8gsp3W76RN6ZQ4rPwK2QFzGs')
+'''
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
 logging.getLogger('discord.http').setLevel(logging.INFO)
@@ -28,6 +43,4 @@ dt_fmt = '%Y-%m-%d %H:%M:%S'
 formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-
-
-intents = discord.Intents.default()
+'''

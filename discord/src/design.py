@@ -1,7 +1,26 @@
 import datetime
-
 import discord
+from discord import ui
+
+from .firebase import fetch
 from .firebase_types import School, Club
+
+
+
+  
+class PostsModal(ui.Modal, title="Design"):
+  subject = discord.ui.TextInput(label="Title")
+  desc = discord.ui.TextInput(
+    label = "Description",
+    style= discord.TextStyle.long,
+    max_length= 500
+  )
+
+  async def on_submit(self, interaction: discord.Interaction):
+    await interaction.response.send_message(f'Test Submission, {self.subject}, {self.desc}')
+
+
+
 
 class Designer():
   def __init__(self, schools: dict[School]):
@@ -52,6 +71,4 @@ class Post():
   
   async def set_title(self, title):
     self.title = title
-
-
 

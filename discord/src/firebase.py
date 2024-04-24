@@ -17,11 +17,13 @@ from firebase_admin import db
 
 """
 
-async def Validate_Poster(school, club, id):
-  ref = db.reference("/" + school + "/" + club + "/posters")
+async def fetch(path):
+  return db.reference(path)
+
+async def validate_Poster(school, club, id):
+  ref = Fetch("/" + school + "/" + club + "/posters")
   return id in ref
 
-async def Generate(content):
-  ref = db.reference("/posts")
+async def generate(content):
+  ref = Fetch("/posts")
   ref.set(content)
-
