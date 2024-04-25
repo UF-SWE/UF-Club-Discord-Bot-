@@ -29,9 +29,9 @@ function ClubFormPage({user, setUser}) {
         ...prevUser,
         club: clubData.name
       }));
-      
+      const membersMap = new Map([[clubData.members, {}]]);
       await setDoc(docRef, {
-        
+         
           [clubData.name]: {
             // Nested fields for the club
             ["info"]:{
@@ -39,7 +39,17 @@ function ClubFormPage({user, setUser}) {
               phones : clubData.members,
               websites: {},
             },
-            members: clubData.members,
+          
+            members: {
+              [clubData.members]:{
+                admin: 'true',
+                poster: 'true'
+              }
+            },
+            motto: clubData.motto,
+            name: clubData.name,
+            
+            
             posts: {}
             
            
