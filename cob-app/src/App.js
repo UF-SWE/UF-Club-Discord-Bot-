@@ -17,6 +17,7 @@ function App() {
   const [user, setUser] = useState({
     email: '',
     school: 'UF',
+    club : 'N/A',
     accouncements: 'N/A',
   }
 
@@ -34,7 +35,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/clublist" element={<ClubListPage />} />
-          <Route path="/club-form" element={<ClubFormPage />} />
+          <Route path="/club-form" element={<ClubFormPage user={user} setUser={setUser} />} />
           <Route path="/profile" element={<ProfilePage user ={user} setUser={setUser}/>} />
         </Routes>
       

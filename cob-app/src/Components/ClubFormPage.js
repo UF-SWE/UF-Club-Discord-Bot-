@@ -8,14 +8,15 @@ import './ClubFormPage.css';
 
 const docRef = doc(db, "Schools/university of florida");
 
-function ClubFormPage() {
+function ClubFormPage({user, setUser}) {
   const [clubData, setClubData] = useState({
     name: '',
     announcement: '',
     members: '',
-    president: ''
+    motto: ''
   
   });
+  const prevUser = user;
   const prevClub = clubData;
   const handleChange = (e) => {
     setClubData({ ...prevClub, [e.target.name]: e.target.value });
@@ -24,9 +25,13 @@ function ClubFormPage() {
   const handleSubmit = async () => {
     try {
       // Send data to Firebase Firestore
-      
+      setUser(prevUser => ({
+        ...prevUser,
+        club: clubData.name
+      }));
+      const membersMap = new Map([[clubData.members, {}]]);
       await setDoc(docRef, {
-        
+         
           [clubData.name]: {
             // Nested fields for the club
             ["info"]:{
@@ -34,7 +39,17 @@ function ClubFormPage() {
               phones : clubData.members,
               websites: {},
             },
-            members: clubData.members,
+          
+            members: {
+              [clubData.members]:{
+                admin: 'true',
+                poster: 'true'
+              }
+            },
+            motto: clubData.motto,
+            name: clubData.name,
+            
+            
             posts: {}
             
            
@@ -103,10 +118,10 @@ function ClubFormPage() {
           ></textarea>
         </div>
         <div className='form-group'>
-          <label htmlFor="president">President:</label>
+          <label htmlFor="motto"> Motto:</label>
           <textarea
-            id="president"
-            name="president"
+            id="motto"
+            name="motto"
             value={clubData.president}
             onChange={handleChange}
           ></textarea>
