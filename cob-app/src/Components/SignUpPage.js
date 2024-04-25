@@ -22,6 +22,8 @@ function SignUpPage() {
 
   return (
     <div className='login-container'>
+      <img src="./Images/largerSignUp.jpg" alt="Sign Up" className="signup-image">
+      </img>
       <h2>Sign Up</h2>
       <form className='login-form' onSubmit={handleSubmit}>
         <div>

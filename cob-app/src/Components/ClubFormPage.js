@@ -2,44 +2,94 @@
 
 import React, { useState } from 'react';
 import { db } from '../firebase-config';
-import { collection, addDoc } from 'firebase/firestore';
+import {doc, collection, addDoc, updateDoc, setDoc } from 'firebase/firestore';
+import './ClubFormPage.css';
 
 
+const docRef = doc(db, "Schools/university of florida");
 
-const clubsRef = collection(db, 'ClubData');
-function ClubFormPage() {
+function ClubFormPage({user, setUser}) {
   const [clubData, setClubData] = useState({
     name: '',
-    announcement: ''
-  });
+    announcement: '',
+    members: '',
+    motto: ''
   
+  });
+  const prevUser = user;
+  const prevClub = clubData;
   const handleChange = (e) => {
-    setClubData({ ...clubData, [e.target.name]: e.target.value });
+    setClubData({ ...prevClub, [e.target.name]: e.target.value });
   };
-
+  const [submitted, setSubmitted] = useState(false);
   const handleSubmit = async () => {
     try {
       // Send data to Firebase Firestore
-      await addDoc(clubsRef, {
-        name: clubData.name,
-        announcement: clubData.announcement
-        // Add other fields as needed
-      });
+      setUser(prevUser => ({
+        ...prevUser,
+        club: clubData.name
+      }));
+      const membersMap = new Map([[clubData.members, {}]]);
+      await setDoc(docRef, {
+         
+          [clubData.name]: {
+            // Nested fields for the club
+            ["info"]:{
+              emails: clubData.announcement,
+              phones : clubData.members,
+              websites: {},
+            },
+          
+            members: {
+              [clubData.members]:{
+                admin: 'true',
+                poster: 'true'
+              }
+            },
+            motto: clubData.motto,
+            name: clubData.name,
+            
+            
+            posts: {}
+            
+           
+            // Add other fields as needed
+          }
+        } , {merge:true});
+     
       console.log('Club data sent successfully!');
       setClubData({
-        name: '',
-        announcement: ''
+        name: clubData.name,
+        announcement: clubData.announcement
       });
     } catch (error) {
       console.error('Error sending club data: ', error);
     }
+    setSubmitted(true);
   };
+  
+
 
   return (
-    <div>
+  <div className = "signup-form">
+  {submitted ? (
+        <div className="submitted-text">
+           <img src="./Images/largerSignUp.jpg">
+          </img>
+          <div className='content'> 
+            <p>Submitted</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1223186510174621737&permissions=19235279808593&scope=bot" style={{ color: 'white' }}>Invite bot to Discord</a>
+          </div>
+         
+        </div>
+      ) : (
+        <>
+    <img src="./Images/largerSignUp.jpg">
+    </img>
+    <div className='content'>
       <h2>Club Signup Form</h2>
       <form>
-        <div>
+        <div className='form-group'>
           <label htmlFor="name">Club Name:</label>
           <input
             type="text"
@@ -49,19 +99,41 @@ function ClubFormPage() {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="description">Description:</label>
+        <div className='form-group'>
+          <label htmlFor="announcement">Announcement:</label>
           <textarea
-            id="description"
-            name="description"
-            value={clubData.description}
+            id="announcement"
+            name="announcement"
+            value={clubData.announcement}
             onChange={handleChange}
           ></textarea>
         </div>
-        {/* Add your other form fields here */}
+        <div className='form-group'>
+          <label htmlFor="members">Members:</label>
+          <textarea
+            id="members"
+            name="members"
+            value={clubData.members}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className='form-group'>
+          <label htmlFor="motto"> Motto:</label>
+          <textarea
+            id="motto"
+            name="motto"
+            value={clubData.president}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        
         <button type="button" onClick={handleSubmit}>Submit</button>
       </form>
     </div>
+    </>
+    )}
+ </div>
+      
   );
 }
 

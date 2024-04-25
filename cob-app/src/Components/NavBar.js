@@ -10,13 +10,16 @@ export default function Navbar({user}) {
       </Link>
 
       <ul>
-        {user !== null && (
-           <li>Welcome, {user}</li>
+        {user.email !== '' && (
+          <CustomLink to="/profile">
+           <button >Welcome, {user.email}</button>
+          </CustomLink>
         )}
         <CustomLink to="/login">Login</CustomLink>
         <CustomLink to="/signup">Sign Up</CustomLink>
         <CustomLink to="/clublist">Clubs </CustomLink>
         <CustomLink to="/about">About </CustomLink>
+        
        
       </ul>
     </nav>

@@ -9,11 +9,19 @@ import Navbar from './Components/NavBar'
 import './App.css';
 import logo from './logo.svg';
 import ClubFormPage from './Components/ClubFormPage';
+import ProfilePage from './Components/Profile';
 
 function App() {
   const defaultCenter = { lat: 32, lng: -82 }; 
   const defaultZoom = 10;
-  const [user, setUser] = useState(null); // State for storing user information
+  const [user, setUser] = useState({
+    email: '',
+    school: 'UF',
+    club : 'N/A',
+    accouncements: 'N/A',
+  }
+
+  ); // State for storing user information
   
 
   return (
@@ -23,11 +31,12 @@ function App() {
         <Routes>
           
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage setUser={setUser} />} />
+          <Route path="/login" element={<LoginPage user={user} setUser={setUser} />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/clublist" element={<ClubListPage />} />
-          <Route path="/club-form" element={<ClubFormPage />} />
+          <Route path="/club-form" element={<ClubFormPage user={user} setUser={setUser} />} />
+          <Route path="/profile" element={<ProfilePage user ={user} setUser={setUser}/>} />
         </Routes>
       
     </div>

@@ -1,11 +1,18 @@
 import React from 'react';
 import './HomePage.css';
+
 const HomePage = () => {
   return (
     <div className="homepage">
-      <div className="header-text">
+      <img src="./Images/studentExperience.jpg">
+      </img>
+      <div className='overlay'></div>
+      <div className='content'>
         <h1>Welcome to C.O.B.</h1>
         <p>The club organization bot for the University of Florida</p>
+      </div>
+      <div className="header-text">
+        
       </div>
 
       <div className="image-gallery">

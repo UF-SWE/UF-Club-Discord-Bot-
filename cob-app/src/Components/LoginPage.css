@@ -17,6 +17,10 @@
     display: block;
     margin-bottom: 5px;
   }
+  .login-container img {
+    width:100%;
+    height:75%;
+  }
   
   .login-container input[type="email"],
   .login-container input[type="password"] {
