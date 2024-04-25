@@ -13,7 +13,7 @@ function ClubFormPage({user, setUser}) {
     name: '',
     announcement: '',
     members: '',
-    president: ''
+    motto: ''
   
   });
   const prevUser = user;
@@ -94,10 +94,10 @@ function ClubFormPage({user, setUser}) {
           ></textarea>
         </div>
         <div className='form-group'>
-          <label htmlFor="president">President:</label>
+          <label htmlFor="motto"> Motto:</label>
           <textarea
-            id="president"
-            name="president"
+            id="motto"
+            name="motto"
             value={clubData.president}
             onChange={handleChange}
           ></textarea>
