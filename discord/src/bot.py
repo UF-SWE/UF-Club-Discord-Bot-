@@ -1,4 +1,7 @@
-import discord #https://discordpy.readthedocs.io/en/stable/
+#https://discord.com/oauth2/authorize?client_id=1223186510174621737&permissions=19235279808593&scope=bot
+#https://discordpy.readthedocs.io/en/stable/
+#py -m src.bot #in discord directory
+import discord 
 from discord.ext import commands
 
 from .firebase import Firebase
@@ -10,6 +13,7 @@ class ClubBot(commands.Bot):
   def __init__(self):
     self.firebase = Firebase()
 
+    #Permissions bot has on a server, must match invite code.
     intents = discord.Intents.default()
     intents.message_content = True
     super().__init__(
@@ -19,7 +23,7 @@ class ClubBot(commands.Bot):
 
   async def on_ready(self):
     await self.setup()
-    await self.tree.sync()
+    #await self.tree.sync()
     print("Logged on as", self.user)
     
   async def setup(self):
@@ -31,7 +35,7 @@ class ClubBot(commands.Bot):
 
 def main():
   client = ClubBot()
-  client.run('MTIyMzE4NjUxMDE3NDYyMTczNw.GmkuUk.XiZqBVONiSTFYU8gsp3W76RN6ZQ4rPwK2QFzGs')
+  client.run(DISCORD_TOKEN)
 
 if __name__ == "__main__":
   main()  

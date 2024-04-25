@@ -1,3 +1,5 @@
+#Lessons taken from MIL
+#https://github.com/uf-mil/discord-bot/blob/stale-issues-tracking/src/env.py
 import os
 
 from dotenv import load_dotenv

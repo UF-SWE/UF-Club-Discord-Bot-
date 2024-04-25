@@ -1,6 +1,5 @@
 from .bot import ClubBot
 import discord
-from discord import ui
 from discord.ext import commands
 
 class SchoolSelect(discord.ui.Select):
@@ -23,10 +22,13 @@ class SchoolSelect(discord.ui.Select):
       options = options,
     )
   
+  #Callbacks are what happens when a user selects an option.
   async def callback(self, interaction:discord.Interaction):
     if not isinstance(interaction.user, discord.Member):
       return
     
+    #Should only ever be 1 value.
+    #ephemeral works here because its an interaction
     for value in self.values:
       embed = discord.Embed(title = "Design a Club Post", description = "Select a Club")
       await interaction.response.send_message(embed = embed, view = ClubView(bot = self.bot, key = value), ephemeral=True)
@@ -56,14 +58,15 @@ class ClubSelect(discord.ui.Select):
       return
       
     for value in self.values:
-      members : dict
+      members : dict #Python won't recognize this as a dict otherwise.
       members = self.clubs[value]['members']
       user = members.get(interaction.user.name, None)
+      #if user == if user is not None
       if user and user['poster']:
         await interaction.response.send_modal(PostsModal(school = self.school, club = value))
 
       else:
-        await interaction.response.send_message(f"Sorry, you are not permitted to make post for {self.clubs[value]['name']}.")
+        await interaction.response.send_message(f"Sorry, you are not permitted to make post for {self.clubs[value]['name']}.", ephemeral=True)
 
 class ClubView(discord.ui.View):
   def __init__(self, bot: ClubBot, key: str | None = None):
@@ -79,6 +82,7 @@ class PostsModal(discord.ui.Modal):
     self.school = school
     self.club = club
 
+  #TODO: can this be bigger?
   subject = discord.ui.TextInput(label="Title")
   desc = discord.ui.TextInput(
     label = "Description",
@@ -86,6 +90,7 @@ class PostsModal(discord.ui.Modal):
     max_length= 500
   )
 
+  #TODO: allowing schedule post for future.
   async def on_submit(self, interaction: discord.Interaction):
     embed = discord.Embed(
       title = self.subject,
@@ -97,6 +102,7 @@ class DesignCog(commands.Cog):
   def __init__(self, bot: ClubBot):
     self.bot = bot
 
+  #TODO: investigate if ephermeral works with cogs.
   @commands.command()
   async def design(self, ctx : commands.Context):
     embed = discord.Embed(title = "Design a Club Post", description = "Select a School")
@@ -104,8 +110,9 @@ class DesignCog(commands.Cog):
 
 async def setup(bot: ClubBot):
   await bot.add_cog(DesignCog(bot))  
-  
+
   '''
+  None COG Method, not OOP, depracated
   @bot.tree.command(name = "design")
   async def design(interaction: discord.Interaction):
     embed = discord.Embed(title = "Design a Club Post", description = "Select a School")
