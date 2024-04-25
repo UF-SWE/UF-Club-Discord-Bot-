@@ -8,7 +8,6 @@ from .env import (
 
 class ClubBot(commands.Bot):
   def __init__(self):
-    print("Bot")
     self.firebase = Firebase()
 
     intents = discord.Intents.default()
@@ -19,8 +18,9 @@ class ClubBot(commands.Bot):
     )
 
   async def on_ready(self):
-    print("Logged on as", self.user)
     await self.setup()
+    await self.tree.sync()
+    print("Logged on as", self.user)
     
   async def setup(self):
     extensions = (
